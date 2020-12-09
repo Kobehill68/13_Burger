@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Kobehill68/13_Burger/issues"
   },
-  "homepage": "https://github.com/Kobehill68/13_Burger#readme"
+  "homepage": "https://github.com/Kobehill68/13_Burger#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "mysql": "^2.18.1"
+  }
 }
