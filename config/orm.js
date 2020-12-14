@@ -42,16 +42,14 @@ const orm = {
         });
     },
 
-    updateOne(table, objColVals, condition, cb) {
-        let queryString = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition}`;
-
-        console.log(queryString);
-        connection.query(queryString, function (err, result) {
-            if (err) {
-                throw err;
-            }
-
-            cb(result);
+    updateOne(table, objColValues, condition, cb) {
+        let qs = `UPDATE ${table} SET ${objToSql(objColValues)} WHERE ${condition}`;
+    
+        console.log(qs);
+    
+        connection.query(qs, (err, result) => {
+          if (err) { throw err; }
+          cb(result);
         });
     },
 

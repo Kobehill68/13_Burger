@@ -1,32 +1,42 @@
-<h1 class="d-flex justify-content-center">Burgers</h1>
+<div class="container">
+   <div class="row"></div>
 
-<div>
-    <ul>
-        {{#each burgers}}
-        {{> burgers/burgers-block }}
-        {{/each}}
-    </ul>
+  <div class="demo_wrap">
+    <h1>Eat-Da-Burger!</h1>
+  </div>
 
-</div>
+  <img src="" alt="burger" width="150" height="150">
 
-<div class="row">
-    <div class="col col-md-5 col-lg-5 px-0">
-        {{!-- empty space --}}
+  <h2>Create Your Burger!</h2>
+
+  <form class="create-form">
+    <div class="form-group">
+      <label for="bgr">Create Your Burger:</label><br>
+      <input type="text" id="bgr" name="name"><br>
+      <button type="submit">Add Burger</button>
     </div>
-    <div class="col col-md-7 col-lg-7 px-0">
-        <h2>Add a burger</h2>
+  </form>
 
-        <form class="create-form">
+  <hr>
+  <h2>Burger Served!</h2>
 
-            <label style="margin-right: 5px;" for="burg">Burger Name:</label>
-            <input type="text" id="burg" name="name">
-            <div class="row px-0">
-                <div class="col mt-1">
-                    <button type="submit">Add burger</button>
-                </div>
-            </div>
-        </form>
+  <ul>
+    {{#each burgers}}
+    {{#unless devoured}}
+    {{> burger-block devoured=false}}
+    {{/unless}}
+    {{/each}}
+  </ul>
 
-        <button id="deleteBurger" class="btn btn-danger mt-1">Delete all burgers</button>
-    </div>
+ <hr>
+ <h2>Burgers Eaten!</h2>
+
+  <ul>
+    {{#each burgers}}
+    {{#if devoured}}
+    {{> eaten-block devoured=true}}
+    {{/if}}
+    {{/each}}
+  </ul>
+
 </div>
