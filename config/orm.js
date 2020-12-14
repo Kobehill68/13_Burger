@@ -42,7 +42,7 @@ const orm = {
         });
     },
 
-    updateOne(table, objColValues, condition, cb) {
+    updateOne:(table, objColValues, condition, cb) => {
         let qs = `UPDATE ${table} SET ${objToSql(objColValues)} WHERE ${condition}`;
     
         console.log(qs);
@@ -53,7 +53,7 @@ const orm = {
         });
     },
 
-    deleteOne(table, condition, cb) {
+    deleteOne: (table, condition, cb) => {
         let queryString = `DELETE FROM ${table} WHERE ${condition}`;
 
         connection.query(queryString, (err, result) => {
