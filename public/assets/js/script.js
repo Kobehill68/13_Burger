@@ -1,59 +1,40 @@
 $(function () {
-    $(".create-form").on("submit", function (event) {
-        // Make sure to preventDefault on a submit event.
-        event.preventDefault();
 
-        // get name user entered on screen
-        const newBurger = {
-            name: $("#burg").val().trim()
-        };
+    $(".eat-burger").on("click", (event) => {
+        console.log("click working")
+        let id = $(this).data("id");
+        
+        $.ajax("api/burgers/" + id, {
+            type: "PUT"
+          , data: hasEatenState
+        }).then(() => {
+          console.log("changed devour to", id);
+          location.reload();
+        });
+    });
 
-        // Send the POST request.
+    $(".create-form").on("submit", (event) => {
+        event, preventDefault();
+        let newBurger = { burger_name: $("#bgr").val().trim(), devoured: 0, }
+        console.log(newBurger)
         $.ajax("/api/burgers", {
             type: "POST",
             data: newBurger
-        }).then(
-            function () {
-                console.log("created new burger");
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
-    });
+        }).then(() => {
+            console.log("created burger");
+            location.reload();
+        })
+    })
 
-    $(".devour-burger").on("click", function (event) {
-        event.preventDefault();
+    (".delete-burger").on("click", (event) => {
+        let id = $(this).data("id");
 
-        // get id from the screen, from the data-id
-        const id = $(this).data("id");
-        // devoured!
-        const devour = 1; //1 for true
-
-        // pareters to pass to back-end
-        const consumed = {
-            devoured: devour
-        };
-
-        //call back end with id in parameters and data in the body
         $.ajax("/api/burgers/" + id, {
-            type: "PUT",
-            data: consumed
-        }).then((result) => {
-            console.log(result);
-            location.reload();
-        });
-    });
-
-    $("#deleteBurger").on("click", function (event) {
-        event.preventDefault();
-        $.ajax("/api/delete",
-            {
                 type: "DELETE"
-            }
-        ).then((result) => {
-            console.log(result);
+        }).then(() => {
+            console.log("deleted burger", id);
             location.reload();
         });
-
     });
+    
 })
