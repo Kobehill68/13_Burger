@@ -1,0 +1,32 @@
+<h1 class="d-flex justify-content-center">Burgers</h1>
+
+<div>
+    <ul>
+        {{#each burgers}}
+        {{> burgers/burgers-block }}
+        {{/each}}
+    </ul>
+
+</div>
+
+<div class="row">
+    <div class="col col-md-5 col-lg-5 px-0">
+        {{!-- empty space --}}
+    </div>
+    <div class="col col-md-7 col-lg-7 px-0">
+        <h2>Add a burger</h2>
+
+        <form class="create-form">
+
+            <label style="margin-right: 5px;" for="burg">Burger Name:</label>
+            <input type="text" id="burg" name="name">
+            <div class="row px-0">
+                <div class="col mt-1">
+                    <button type="submit">Add burger</button>
+                </div>
+            </div>
+        </form>
+
+        <button id="deleteBurger" class="btn btn-danger mt-1">Delete all burgers</button>
+    </div>
+</div>
