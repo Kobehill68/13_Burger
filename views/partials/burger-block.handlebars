@@ -1,8 +1,8 @@
-<li>
-    {{burger_name}}
-    <button class="change-devour" data-id="{{id}}" data-newdevour={{devoured}}>
-        {{#if devoured}}DEVOUR!{{else}}MAKE!{{/if}}
-    </button>
 
-    <button class="delete-burger" data-id="{{this.id}}">CLEAN PLATE!</button>
-</li>
+<div class="{{#if devoured}} d-flex justify-content-end {{/if}}">
+    <li>
+        {{!-- we actually do not use data-devour, but it's good to have --}}
+        <label data-devour="{{devoured}}"> {{burger_name}}  </input>
+        <button class="devour-burger {{#if devoured}}btn btn-success{{/if}}" data-id="{{this.id}}">DEVOUR{{#if devoured}}ED{{/if}}!</button>
+    </li>
+</div>
