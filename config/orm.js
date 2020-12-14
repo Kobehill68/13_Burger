@@ -1,86 +1,76 @@
 const connection = require("../config/connection");
 
-function printQuestionsMarks(num) {
-    let arr = [];
-    for(let i = 0; i < num; i++) {
-        arr.push("?")
-    }
-    return arr.toString();
-}
 
-function objToSql(ob) {
-    var arr = [];
-  
-    for (var key in ob) {
-      var value = ob[key];
-      if (Object.hasOwnProperty.call(ob, key)) {
-        if (typeof value === "string" && value.indexOf(" ") >= 0) {
-          value = "'" + value + "'";
-        }
-        arr.push(key + "=" + value);
-      }
-    }
-    return arr.toString();
-}
 
 const orm = {
-    selectAll: function(tableInput, cb) {
-        let queryString = "SELECT * FROM " + tableInput + ";"
-        connection.query(queryString, function(err, result) {
-            if(err) {throw err}
+    selectAll: (tableInput, cb) => {
+        let queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, function (err, result) {
+            if (err) throw err;
             cb(result);
         });
     },
 
     insertOne: (table, cols, values, cb) => {
-        var queryString = "INSERT INTO " + table;
-
+        let queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += cols.toString();
+        queryString += ",";
+        queryString += "devoured"
         queryString += ") ";
         queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
+        queryString += "?"; //vals.toString();
+        queryString += ",";
+        queryString += "?";
         queryString += ") ";
 
         console.log(queryString);
 
-        connection.query(queryString, vals, function(err, result) {
+        values.push("0"); // zero for false; can't have been devoured if it's new
+        connection.query(queryString, vals, function (err, result) {
             if (err) {
                 throw err;
             }
 
             cb(result);
         });
+
     },
 
     updateOne(table, objColVals, condition, cb) {
-        let queryString = "UPDATE " + table;
+        const queryString = `
+        
+            UPDATE ${table}
+            SET ${objColVals.devourParm} = ?
+            WHERE ${objColVals.idParm} = ? 
+        
+        `;
 
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
+        connection.query(queryString, condition, (err, result) => {
+            if (err) throw err;
 
-        console.log(queryString);
-        connection.query(queryString, function(err, result) {
+            cb(result);
+        });
+
+    },
+
+    delete(table, cb) {
+        var queryString = `
+        
+                
+        DELETE FROM
+        ${table}
+        WHERE devoured = 1
+        `;
+
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
 
             cb(result);
         });
-    },
 
-    delete(table, condition, cb) {
-        let queryString = `DELETE FROM ${table} WHERE ${condition}`;
-
-        connection.query(queryString, function(err, result) {
-            if(err) {
-                throw err;
-            }
-
-            cb(result)
-        })
     }
 };
 
