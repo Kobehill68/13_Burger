@@ -5,7 +5,7 @@ const burgers = require("../models/burger.js");
 router.get("/", (_req, res) => {
     burgers.selectAll((data) => {
         var hbsObject = { burgers: data }
-        console.log(hbsObject)
+        console.log(hbsObject);
         res.render("index", hbsObject)
     })
 });
@@ -18,8 +18,7 @@ router.post("/api/burgers", (req, res) => {
 
 router.put("/api/burgers/:id", (req, res) => {
     var condition = "id = " + req.params.id;
-    console.log("condition", condition);
-    burgers.updateOne({ devoured: true }, condition, (result) => {
+    burgers.updateOne({ devoured: true, }, condition, (result) => {
         if (result.changedRows == 0) { return res.status(404).end(); } else { res.status(200).end(); }
     });
 });
@@ -29,6 +28,6 @@ router.delete("api/burgers/:id", (req, res) => {
     burgers.deleteOne(condition, (result) => {
       if (result.effectedRows === 0) {return res.status(404).end(); } else { res.status(200).end(); }
     });
-})
+});
 
 module.exports = router
