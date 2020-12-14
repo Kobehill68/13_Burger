@@ -54,7 +54,7 @@ const orm = {
 
     },
 
-    delete(table, cb) {
+    deleteAll(table, cb) {
         var queryString = `
         
                 
