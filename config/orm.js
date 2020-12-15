@@ -20,7 +20,7 @@ const orm = {
   },
 
 
-  updateOne: function (table, col, whereCol, whereVal, cb) {
+  updateOne: function (table, col, value, whereCol, whereVal, cb) {
     const queryString = `UPDATE ?? SET ?? = ? WHERE ?? = ?`;
     connection.query(queryString, [table, col, value, whereCol, whereVal], (err, data) => {
       if (err) throw err;

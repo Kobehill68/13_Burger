@@ -14,7 +14,7 @@ li{
 }
 
 header{
-  background-color:#3feee6;
+  background-color:#f70f07;
 }
 
 main{
@@ -26,8 +26,8 @@ section{
 }
 
 input:focus{
-  border-bottom-color: #3feee6 !important;
-  box-shadow: #3feee6 !important;
+  border-bottom-color: #5babda !important;
+  box-shadow: #0b9fb9c0 !important;
 }
 
 .btn{
