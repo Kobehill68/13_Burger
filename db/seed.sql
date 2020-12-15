@@ -1,7 +1,5 @@
-INSERT INTO burgers (burger_name, devoured) 
-VALUES ('Shackburger', 0), 
-       ('tiny burger', 0),
-       ('Big Burger', 0),
-       ('Small Buger', 1),
-       ('Veggi Burger', 1);
+USE burgers_db
 
+INSERT INTO burgers (burger_name) VALUES ('The Big');
+INSERT INTO burgers (burger_name) VALUES ('The Small');
+INSERT INTO burgers (burger_name) VALUES ('The Original');
