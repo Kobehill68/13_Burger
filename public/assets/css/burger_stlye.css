@@ -1,19 +1,67 @@
-li {
-  padding: 5px;
-  margin: 5px;
-  background: #faebd7;
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  padding: 3rem;
 }
 
-.label {
-  font-weight: bold;
+h5 {
+  font-size: 1.75rem;
 }
 
-.create-update-form {
-  padding: 5px;
-  margin: 5px;
-  background: aqua;
+li{
+  font-size: 1.5rem;
+  line-height: 3rem;
 }
 
-.form-group {
-  margin-bottom: 5px;
+header{
+  background-color:#3feee6;
 }
+
+main{
+  margin: 0 0 3rem;
+}
+
+section{
+  padding: 3rem 0 3rem;
+}
+
+input:focus{
+  border-bottom-color: #3feee6 !important;
+  box-shadow: #3feee6 !important;
+}
+
+.btn{
+  background-color: #fc4445;
+}
+
+.btn:hover{
+  background-color: #3feee6;
+}
+
+.message{
+  padding: 2rem 0 0;
+}
+
+#submit{
+  margin: 3rem 0 2rem;
+}
+
+
+
+@media screen and (min-width: 600px) {
+  h1 {
+      font-size: 4rem;
+      margin: 0;
+      padding: 3rem;
+  }
+  
+  h5 {
+      font-size: 2.5rem;
+  }
+
+  li{
+      font-size: 1.5rem;
+      line-height: 3rem;
+  }
+}
+

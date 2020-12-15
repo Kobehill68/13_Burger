@@ -1,42 +1,76 @@
-<div class="container">
-   <div class="row">
-
-  <div class="demo_wrap">
-    <h1>Eat-Da-Burger!</h1>
+<header>
+  <div class="row">
+    <h1 class="center-align">Eat some burgers!</h1>
   </div>
+</header>
 
-  <img src="" alt="burger" width="150" height="150">
-
-  <h2>Create Your Burger!</h2>
-
-  <form class="create-form">
-    <div class="form-group">
-      <label for="bgr">Create Your Burger:</label><br>
-      <input type="text" id="bgr" name="name"><br>
-      <button type="submit">Add Burger</button>
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col s4">
+        <h5 class="center-align">Burgers to eat:</h5>
+      </div>
+      <div class="col s4"></div>
+      <div class="col s4">
+        <h5 class="center-align">Burgers eaten:</h5>
+      </div>
     </div>
-  </form>
-
-  <hr>
-  <h2>Burger Served!</h2>
-
-  <ul>
-    {{#each burgers}}
-    {{#unless devoured}}
-    {{> burger-block devoured=false}}
-    {{/unless}}
-    {{/each}}
-  </ul>
-
- <hr>
- <h2>Burgers Eaten!</h2>
-
-  <ul>
-    {{#each burgers}}
-    {{#if devoured}}
-    {{> eaten-block devoured=true}}
-    {{/if}}
-    {{/each}}
-  </ul>
-
+    <div class="row">
+      <div class="col s4">
+        {{!-- burger list --}}
+        <ol class="center-align">
+          {{#each burgers}}
+          {{#unless devoured}}
+          <li>
+            {{burger_name}}
+          </li>
+          {{/unless}}
+          {{/each}}
+        </ol>
+      </div>
+      {{!-- button list --}}
+      <div class="col s4">
+        <ol class="center-align">
+          {{#each burgers}}
+          {{#unless devoured}}
+          <li><button class="devour waves-effect waves-light btn black-text" id={{id}}>Devour it!</button></li>
+          {{/unless}}
+          {{/each}}
+        </ol>
+      </div>
+      {{!-- Devour It! list --}}
+      <div class="col s4">
+        <ol class="center-align">
+          {{#each burgers}}
+          {{#if devoured}}
+          <li>
+            {{burger_name}}
+          </li>
+          {{/if}}
+          {{/each}}
+        </ol>
+      </div>
+    </div>
+  </main>
+  <div class="divider"></div>
+  <section>
+    <div class="row center-align">
+      <div class="col s0"></div>
+      <div class="col s12">
+        <form>
+          <input type="text" id="burger" name="burger" placeholder="Type a burger name." autofocus></input>
+          <button id="submit" class="waves-effect waves-light btn black-text">Submit</button>
+          <p class="message">Enter a burger you want to eat! Click the "Submit" button.</p>
+        </form>
+      </div>
+      <div class="col s0"></div>
+    </div>
+  </section>
+  <div class="row center-align">
+    <div class="col s4"></div>
+    <div class="col s4">
+      <button id="clearAll" class="waves-effect waves-light btn black-text">Clear All</button>
+    </div>
+    <div class="col s4"></div>
+  </div>
 </div>

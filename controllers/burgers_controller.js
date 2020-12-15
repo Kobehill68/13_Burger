@@ -3,33 +3,49 @@ const router = express.Router();
 const burger = require("../models/burger.js");
 
 router.get("/", (_req, res) => {
-  burger.selectAll((data) => {
-    let hbsObject = { burgers: data };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
+  burger.all((data) => {
+    const dataOb = {
+      burgers: data,
+    };
+    res.render("index", dataOb);
   });
 });
 
-router.post("/api/burgers", (req, res) => {
-  burger.insertOne(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], (result) => {
-    res.json({ id: result.insertId });
+router.post("/", (req, res) => {
+  burger.insert(req.body.burger_name, function (result) {
+    if (result) {
+      res.sendStatus(201).end();
+    } else {
+      console.log("post error");
+      res.sendStatus(400).end();
+    }
   });
 });
 
-router.put("/api/burgers/:id", (req, res) => {
-  let condition = "id = " + req.params.id;
-  console.log("condition", condition);
-  burger.updateOne({ devoured: true, }, condition, (result) => {
-    if (result.changedRows == 0) { return res.status(404).end(); } else { res.status(200).end(); }
-  })
-});
-
-router.delete("/api/burgers/:id", (req, res) => {
-  let condition = "id = " + req.params.id;
-  console.log(condition);
-  burger.deleteOne(condition, (result) => {
-    if (result.effectedRows === 0) {return res.status(404).end(); } else { res.status(200).end(); }
+router.patch("/", (req, res) => {
+  const idValue = req.body.id;
+  burger.update(idValue, function (result) {
+    if (result) {
+      res.sendStatus(202).end();
+    } else {
+      console.log("patch error");
+      res.sendStatus(400).end();
+    }
   });
 });
 
-module.exports = router
+router.delete('/', (_req, res) => {
+  burger.clear(
+    function (result) {
+      if (result) {
+        res.sendStatus(202).end();
+      } else {
+        console.log("delete error");
+        res.sendStatus(400).end();
+      }
+    }
+  );
+});
+
+
+module.exports = router;
