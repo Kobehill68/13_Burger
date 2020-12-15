@@ -1,3 +1,4 @@
-INSERT INTO burgers (burger_name, devoured)
-VALUES("Big Mac", 0), ("Tiny Mac", 0), ("Small Mac", 0), ("Big Tiny", 1)
+INSERT INTO burgers (burger_name) VALUES ('Shackburger');
+INSERT INTO burgers (burger_name) VALUES ('Truffle Mushroom Swiss Smashed Burger');
+INSERT INTO burgers (burger_name, devoured) VALUES ('Double Double Animal Style', true);
 
